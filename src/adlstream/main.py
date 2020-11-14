@@ -3,12 +3,12 @@ import itertools
 import ADLStream
 from tqdm import tqdm
 
-PERIODS = [10, 100, 250, 500, 750, 1000]  # [10, 100, 250, 500, 750, 1000]
-CLOUDS = ["Clear sky", "Overcast", "Variable", "Very variable"]
+PERIODS = [100, 500, 1000]  # [10, 100, 250, 500, 750, 1000] ms
+CLOUDS = ["Variable"]  # ["Clear sky", "Overcast", "Variable", "Very variable"]
 SITES = ["Alderville"]  # , "Varennes"]
 
-PAST_HISTORY = [300, 600, 1200]
-FORECASTING_HORIZON = [60, 120, 300]
+PAST_HISTORY = [300, 1200]
+FORECASTING_HORIZON = [60, 120]
 
 MODELS = {
     "mlp": {"hidden_layers": [256, 128],},
@@ -97,7 +97,7 @@ past_history = PAST_HISTORY[0]
 forecasting_horizon = FORECASTING_HORIZON[0]
 
 for site, clouds, period, past_history, forecasting_horizon in tqdm(
-    itertools.product(SITES, CLOUDS, PERIODS, PAST_HISTORY, FORECASTING_HORIZON)
+    list(itertools.product(SITES, CLOUDS, PERIODS, PAST_HISTORY, FORECASTING_HORIZON))
 ):
     for model in MODELS:
         print("\n{}\n".format(model))
