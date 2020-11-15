@@ -107,4 +107,3 @@ dataset_folders = [
 
 for path in tqdm(dataset_folders, position=0):
     genereta_dataset(path, periods)
-    break
