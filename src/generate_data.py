@@ -5,6 +5,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 from tqdm import tqdm
 
+norm_max = 1400
+
 
 def genereta_dataset(dataset_folder, periods=[]):
     files = sorted(
@@ -73,6 +75,9 @@ def genereta_dataset(dataset_folder, periods=[]):
             final_zeros += 1
 
         timeseries_data = timeseries_data.iloc[initial_zeros:-final_zeros]
+
+        timeseries_data = timeseries_data / norm_max
+
         timeseries_data.to_csv(
             os.path.join(
                 dataset_folder,
@@ -82,6 +87,7 @@ def genereta_dataset(dataset_folder, periods=[]):
             )
         )
 
+    data = data / norm_max
     data.to_csv(
         os.path.join(
             dataset_folder,
@@ -101,3 +107,4 @@ dataset_folders = [
 
 for path in tqdm(dataset_folders, position=0):
     genereta_dataset(path, periods)
+    break
