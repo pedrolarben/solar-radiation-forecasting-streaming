@@ -90,12 +90,6 @@ def run_adls_experiment(
     adls.run()
 
 
-site = SITES[0]
-clouds = CLOUDS[0]
-period = PERIODS[3]
-past_history = PAST_HISTORY[0]
-forecasting_horizon = FORECASTING_HORIZON[0]
-
 for site, clouds, period, past_history, forecasting_horizon in tqdm(
     list(itertools.product(SITES, CLOUDS, PERIODS, PAST_HISTORY, FORECASTING_HORIZON))
 ):
