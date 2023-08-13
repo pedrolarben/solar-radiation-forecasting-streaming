@@ -36,14 +36,14 @@ def read_data(dataset_folder):
         if data is None:
             data = file_df
         else:
-            data = pd.concat([data, file_df], axis=1, sort=False)
+            data = pd.concat([data, file_df], axis=1, sort=True)
     print(dataset_folder)
     data.index = pd.to_datetime(
         data.index.get_level_values(0).astype(str).values
         + data.index.get_level_values(1).astype(str).values,
         format="%Y-%m-%d%H:%M:%S.%f",
     )
-    data = data.fillna(method="ffill")
+    data.fillna(method="ffill", inplace=True)
     return data
 
 
